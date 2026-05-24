@@ -46,6 +46,28 @@
     return null;
   }
 
+  /* ---------------- Ad slots (Google AdSense) ---------------- */
+  /* Produces a single AdSense unit. Pass true for a fixed banner,
+     false/omitted for a responsive auto unit. */
+  function adSlot(isBanner) {
+    return '<div class="ad-slot"><ins class="adsbygoogle" ' +
+      'style="display:block;' + (isBanner ? 'width:100%;height:90px;' : '') + '" ' +
+      'data-ad-client="ca-pub-1319817671788428" ' +
+      'data-ad-slot="6141169453" ' +
+      (isBanner ? '' : 'data-ad-format="auto" ') +
+      'data-full-width-responsive="true"></ins></div>';
+  }
+  /* In a single-page app, ad units added after navigation must be
+     activated explicitly. Push once per not-yet-filled <ins>. */
+  function activateAds() {
+    try {
+      var units = document.querySelectorAll("ins.adsbygoogle:not([data-adsbygoogle-status])");
+      for (var i = 0; i < units.length; i++) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (e) { /* AdSense unavailable (e.g. blocked) — ignore */ }
+  }
+
   /* ---------------- Page registry ---------------- */
   /* registry: id -> { id, route, title, eyebrow, sectionKey, page, kind } */
   var registry = {};
@@ -233,7 +255,7 @@
     }
 
     // Ad slot
-    html += '<div class="ad-slot">Advertisement</div>';
+    html += adSlot();
 
     // Sources / dossier
     if (pg.sources && pg.sources.length) {
@@ -286,7 +308,7 @@
     sbHtml += D.sections.map(function (s) {
       return '<div class="side-list"><a href="/' + s.key + '" data-link>' + esc(s.label) + '</a></div>';
     }).join("");
-    sbHtml += '</div><div class="ad-slot">Advertisement</div>';
+    sbHtml += '</div>' + adSlot();
     sb.innerHTML = sbHtml;
 
     setMeta({
@@ -360,7 +382,7 @@
       return '<div class="side-list"><a href="/' + s.key + '" data-link>' + esc(s.label) + '</a></div>';
     }).join("");
     sbHtml += '</div>';
-    sbHtml += '<div class="ad-slot">Advertisement</div>';
+    sbHtml += adSlot();
     sbHtml += '<div class="side-card"><h4>Field Tip</h4><p style="font-size:.86rem;color:var(--muted);margin:0;">' +
       esc(D.tips[0].text) + '</p></div>';
     sb.innerHTML = sbHtml;
@@ -395,7 +417,7 @@
     });
     main.innerHTML = html;
     document.getElementById("sidebar").innerHTML =
-      '<div class="ad-slot">Advertisement</div>' +
+      adSlot() +
       '<div class="side-card dossier"><h4>Patch Notes</h4>' +
       D.sources.filter(function (s) { return s.id === "steam-news" || s.id === "foxhole-site"; })
         .map(function (s) {
@@ -420,7 +442,7 @@
       return '<li><span class="tip-cat">' + esc(t.cat) + '</span>' + esc(t.text) + '</li>';
     }).join("") + '</ul>';
     main.innerHTML = html;
-    document.getElementById("sidebar").innerHTML = '<div class="ad-slot">Advertisement</div>';
+    document.getElementById("sidebar").innerHTML = adSlot();
     setMeta({ title: "Foxhole Field Tips — " + D.site.name,
       description: "Quick practical Foxhole tips for new players on logistics, survival, and etiquette.",
       route: "/tips", schemaType: "CollectionPage" });
@@ -593,7 +615,7 @@
   scrim.addEventListener("click", closeMobileNav);
 
   /* ---------------- Router ---------------- */
-  function route() {
+  function routeInner() {
     var path = location.pathname.replace(/\/+$/, "") || "/";
     closeMobileNav();
     window.scrollTo(0, 0);
@@ -615,6 +637,12 @@
     highlightNav(path);
     var main = document.getElementById("main");
     if (main && main.focus) main.focus();
+  }
+
+  /* Render the route, then (re)activate any AdSense units it added. */
+  function route() {
+    routeInner();
+    activateAds();
   }
 
   function navigate(href) {

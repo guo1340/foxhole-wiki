@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://foxhole-field-manual.example/sitemap.xml
+Sitemap: https://foxhole.gamewikihub.com/sitemap.xml
