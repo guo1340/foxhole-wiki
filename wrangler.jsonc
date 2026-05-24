@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers static-assets configuration.
+  // The site is a client-side-routed SPA: any unknown path must serve
+  // index.html so the in-app router can handle it. Cloudflare does this
+  // natively via "not_found_handling" — do NOT use a _redirects file,
+  // which Cloudflare rejects as an infinite loop.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "foxhole-wiki",
+  "compatibility_date": "2026-05-24",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "single-page-application"
+  }
+}

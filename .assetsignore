@@ -1,0 +1,8 @@
+.git
+.gitignore
+.assetsignore
+.wrangler
+wrangler.jsonc
+node_modules
+foxhole_wiki_content_blueprint.md
+404.html
