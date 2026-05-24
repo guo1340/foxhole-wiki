@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://foxhole-field-manual.example/sitemap.xml
