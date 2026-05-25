@@ -1,6 +1,6 @@
 /* =================================================================
    Foxhole Field Manual — client-side router and renderers
-   Reads window.WikiData (js/data.js). No framework.
+   Reads window.WikiData (js/data/*.js). No framework.
    ================================================================= */
 (function () {
   "use strict";
@@ -45,6 +45,17 @@
     for (var i = 0; i < D.sections.length; i++) if (D.sections[i].key === key) return D.sections[i];
     return null;
   }
+  function mediaFor(key) {
+    return (D.media && (D.media[key] || D.media.static)) || null;
+  }
+  function mediaPanel(key, title) {
+    var m = mediaFor(key);
+    if (!m || !m.src) return "";
+    return '<figure class="media-panel">' +
+      '<img src="' + esc(m.src) + '" alt="' + esc(m.alt || title || "") + '" loading="lazy" decoding="async">' +
+      '<figcaption class="media-caption"><b>' + esc(m.label || title || "Field Image") + '</b><span>Official gameplay media</span></figcaption>' +
+      '</figure>';
+  }
 
   /* ---------------- Ad slots (Google AdSense) ---------------- */
   /* Produces a single AdSense unit. Pass true for a fixed banner,
@@ -60,6 +71,7 @@
   /* In a single-page app, ad units added after navigation must be
      activated explicitly. Push once per not-yet-filled <ins>. */
   function activateAds() {
+    if (window.__GW_STATIC__) return;
     try {
       var units = document.querySelectorAll("ins.adsbygoogle:not([data-adsbygoogle-status])");
       for (var i = 0; i < units.length; i++) {
@@ -71,11 +83,11 @@
   /* ---------------- Page registry ---------------- */
   /* registry: id -> { id, route, title, eyebrow, sectionKey, page, kind } */
   var registry = {};
-  var searchIndex = [];
+  var searchIndex = Array.isArray(D.searchIndex) ? D.searchIndex.slice() : [];
 
   function register(entry) {
     registry[entry.id] = entry;
-    searchIndex.push(entry);
+    if (!searchIndex.length) searchIndex.push(entry);
   }
 
   D.sections.forEach(function (sec) {
@@ -189,11 +201,14 @@
     trail.push({ label: pg.title, route: pg.route });
 
     var html = breadcrumb(trail);
+    html += '<div class="page-command">';
     html += '<div class="hero-icon">' + icon(pg.icon, "") + '</div>';
     html += '<span class="page-eyebrow">' + esc(entry.eyebrow) + '</span>';
     html += '<h1 class="page-title">' + esc(pg.title) + '</h1>';
     if (pg.tagline) html += '<p class="page-tagline">' + esc(pg.tagline) + '</p>';
     html += '<p class="page-summary">' + esc(pg.summary) + '</p>';
+    html += '</div>';
+    html += mediaPanel(entry.sectionKey, pg.title);
 
     if (pg.teaches && pg.teaches.length) {
       html += '<div class="teaches"><h2>What this page teaches</h2><ul>' +
@@ -290,11 +305,14 @@
     var main = document.getElementById("main");
 
     var html = breadcrumb([{ label: "Manual", route: "/" }, { label: secMeta.label, route: entry.route }]);
+    html += '<div class="page-command">';
     html += '<div class="hero-icon">' + icon(secMeta.icon) + '</div>';
     html += '<span class="page-eyebrow">Section</span>';
     html += '<h1 class="page-title">' + esc(secMeta.label) + '</h1>';
     html += '<p class="page-tagline">' + esc(secMeta.blurb) + '</p>';
     html += '<p class="page-summary">' + esc(sectionIntro(entry.sectionKey)) + '</p>';
+    html += '</div>';
+    html += mediaPanel(entry.sectionKey, secMeta.label);
     html += '<div class="section-block"><h2>Pages in this section</h2>';
     html += cardGrid(arr.map(function (pg) {
       return { route: pg.route, title: pg.title, desc: pg.tagline || pg.summary, icon: pg.icon };
@@ -340,6 +358,10 @@
   function renderHome() {
     var main = document.getElementById("main");
     var html = "";
+    var homeMedia = mediaFor("home");
+    if (homeMedia && homeMedia.src) {
+      document.documentElement.style.setProperty("--home-hero-image", "url('" + homeMedia.src + "')");
+    }
     html += '<section class="hero">' +
       '<h1>Foxhole Field Manual</h1>' +
       '<p class="hero-sub">' + esc(D.site.tagline) + '</p>' +
@@ -587,7 +609,13 @@
     else if (e.key === "Enter") {
       var items = sResults.querySelectorAll(".search-result");
       var pick = activeIdx >= 0 ? items[activeIdx] : items[0];
-      if (pick) { e.preventDefault(); navigate(pick.getAttribute("href")); closeSearch(); }
+      if (pick) {
+        e.preventDefault();
+        var pickHref = pick.getAttribute("href");
+        closeSearch();
+        if (window.__GW_STATIC__) location.href = pickHref;
+        else navigate(pickHref);
+      }
     }
   });
   document.addEventListener("keydown", function (e) {
@@ -636,13 +664,20 @@
 
     highlightNav(path);
     var main = document.getElementById("main");
-    if (main && main.focus) main.focus();
+    if (main && main.focus) {
+      try { main.focus({ preventScroll: true }); }
+      catch (e) { main.focus(); }
+    }
   }
 
   /* Render the route, then (re)activate any AdSense units it added. */
   function route() {
     routeInner();
     activateAds();
+    if (window.scrollTo) {
+      if (window.requestAnimationFrame) window.requestAnimationFrame(function () { window.scrollTo(0, 0); });
+      else window.scrollTo(0, 0);
+    }
   }
 
   function navigate(href) {
@@ -657,11 +692,17 @@
     if (!a) return;
     var href = a.getAttribute("href");
     if (!href || href.charAt(0) !== "/") return;
+    if (window.__GW_STATIC__) {
+      if (!overlay.hidden) closeSearch();
+      return;
+    }
     e.preventDefault();
     if (!overlay.hidden) closeSearch();
     navigate(href);
   });
-  window.addEventListener("popstate", route);
+  window.addEventListener("popstate", function () {
+    if (!window.__GW_STATIC__) route();
+  });
 
   /* In-page anchor links (table of contents) */
   document.addEventListener("click", function (e) {
@@ -672,6 +713,7 @@
   });
 
   /* ---------------- Init ---------------- */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   buildNav();
   buildFooter();
   route();
