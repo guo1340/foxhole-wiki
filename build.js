@@ -208,7 +208,7 @@ function pageHtml(route, rendered) {
   <title>${escText(title)}</title>
   <meta name="description" content="${escAttr(description)}" />
   <link rel="canonical" href="${escAttr(canonical)}" />
-  <meta name="theme-color" content="#0d1117" />
+  ${route === '/404' ? '<meta name="robots" content="noindex, follow" />\n  ' : ''}<meta name="theme-color" content="#0d1117" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="${escAttr(D.site.name)}" />
   <meta property="og:title" content="${escAttr(ogTitle)}" />
