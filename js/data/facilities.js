@@ -312,6 +312,120 @@
       "discord"
     ],
     "updateNotes": "Facility ownership and access mechanics are adjusted between updates."
+  },
+  {
+    "slug": "common-facility-mistakes",
+    "section": "facilities",
+    "icon": "factory",
+    "title": "Common Facility Mistakes",
+    "seoTitle": "Foxhole Common Facility Mistakes: How Not to Waste Industry",
+    "metaDescription": "Foxhole facility mistakes guide covering overbuilding, maintenance burnout, poor placement, private hoarding, bad production chains, and communication failures.",
+    "tagline": "Most bad facilities fail before they produce anything useful.",
+    "summary": "Facilities are powerful, but the community argument around them exists for a reason. Bad facilities overbuild, consume maintenance, block resources, hoard output, and burn out the players who built them. Good facilities are scoped, supplied, communicated, and tied to actual war needs.",
+    "teaches": [
+      "Why overbuilding is the classic facility failure",
+      "How maintenance and resource placement shape facility success",
+      "Why public/private expectations must be clear",
+      "How to plan output around faction demand"
+    ],
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "Facilities are not just bigger factories. They are player-built industrial systems with power, pipelines, production chains, resource inputs, maintenance demands, and social expectations. A facility can become one of the most useful projects in a hex, or it can become a maintenance sink that quietly weakens the faction.",
+          "Most facility mistakes come from building before planning. Players imagine the final product, place too many structures, and only later realize they lack nearby resources, transport access, power, maintenance supplies, or people willing to keep the site alive."
+        ]
+      },
+      {
+        "heading": "Why It Matters",
+        "body": [
+        "A bad facility does not merely waste the builder time. It competes for space, increases local maintenance pressure, consumes resources, blocks better layouts, and creates drama over who can use what. In a logistics game, that matters.",
+        "Community discussions about facilities repeatedly return to overbuilding, maintenance burnout, poor communication, and public/private confusion. Those are strategy problems as much as mechanics problems.",
+        "The best facility players think like quartermasters, engineers, and neighbors at the same time: they care about output, layout, access, and whether the surrounding region can actually live with the project."
+        ]
+      },
+      {
+        "heading": "Practical Uses",
+        "body": [
+          "Use this guide before placing a blueprint. If you cannot explain what the facility produces, who will supply it, who will maintain it, how output leaves, and who is allowed to use it, you are not ready to build.",
+          {
+            "list": [
+              "Start with one purpose instead of every possible production chain",
+              "Build near the resources or transport routes the facility actually needs",
+              "Leave room for trucks, cranes, trains, and future maintenance access",
+              "Put instructions and map posts where public users can understand them",
+              "Coordinate with nearby builders before increasing subregion maintenance load"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Strengths",
+        "body": [
+          "A well-run facility gives a faction advanced output that standard factories cannot provide. It can support armor, late-war equipment, train logistics, and specialized production. A public or coalition facility with clear instructions can multiply the work of many casual players who would never build the whole system themselves.",
+          "The strongest facilities are specialized. They know what they are for, feed that purpose efficiently, and avoid becoming a sprawling vanity project."
+        ]
+      },
+      {
+        "heading": "Weaknesses",
+        "body": [
+          "Facilities are fragile in ways beginners underestimate. Maintenance is ongoing. Power and pipelines introduce hidden bottlenecks. Output can pile up uselessly if nobody moves it forward. Private permissions can make the site feel dead to everyone outside the owning group.",
+          "The biggest weakness is human stamina. A facility that needs constant chores from one tired builder will eventually decay, get abandoned, or create resentment."
+        ]
+      },
+      {
+        "heading": "Community Opinions",
+        "body": [
+          "The community is split because facilities are both necessary and annoying. Many veterans defend them as the backbone of advanced production, while others complain that facilities encourage hoarding, overbuilding, inefficient layouts, and maintenance chores. Both sides have a point.",
+          "My read is that facilities are good when they are planned as infrastructure and bad when they are treated as personal castles. Public logistics discussions also show a recurring frustration: useful shared production needs communication, not just buildings."
+        ]
+      },
+      {
+        "heading": "Common Mistakes",
+        "body": [
+          {
+            "list": [
+              "Overbuilding a huge site before proving one production chain works",
+              "Building away from the resource field or transport route the facility depends on",
+              "Ignoring maintenance until the site becomes a chore factory",
+              "Making everything private while expecting the public to feed inputs",
+              "Producing advanced equipment no front is asking for",
+              "Leaving no signs, map posts, or communication for public users",
+              "Blocking vehicle access with pretty but impractical layouts"
+            ]
+          },
+          "The ugly pattern is scope creep. A small useful facility becomes a medium facility, then a large one, then a half-maintained monument to ambition."
+        ]
+      },
+      {
+        "heading": "Recommendations",
+        "body": [
+          "Do not build a solo facility as your first facility lesson. Join an existing site, learn the power and pipeline logic, and watch how output actually moves to the front. If you eventually build your own, start with a narrow goal and a maintenance plan.",
+          "Before expanding, ask whether the next building increases useful output or merely satisfies the urge to own more infrastructure. If nobody is ready to fuel it, maintain it, defend it, and move its output, do not build it."
+        ]
+      },
+      {
+        "heading": "Related Articles",
+        "body": [
+          "Read Facilities Overview first, then Power and Pipelines, Production Chains, Facility Etiquette, Public Stockpiles, and Refinery and Factory Loop. Facility work only makes sense when you understand the wider logistics chain."
+        ]
+      }
+    ],
+    "mistake": "Building a large facility before proving a small production chain works. Scope creep is the classic path to maintenance burnout.",
+    "tip": "A good facility has a purpose, a resource plan, a maintenance owner, and a distribution plan. Missing any one of those means the build is not ready.",
+    "related": [
+      "facilities/overview",
+      "facilities/power-and-pipelines",
+      "facilities/production-chains",
+      "facilities/facility-etiquette",
+      "logistics/public-stockpiles"
+    ],
+    "sources": [
+      "official-wiki",
+      "subreddit",
+      "discord"
+    ],
+    "updateNotes": "Facility mechanics change often, but overbuilding, poor communication, and maintenance burnout remain the most common strategic failures."
   }
 ];
 })(typeof window !== 'undefined' ? window : globalThis);

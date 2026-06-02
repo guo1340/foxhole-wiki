@@ -123,6 +123,75 @@ DATA_CHUNKS.forEach((chunk) => require(`./js/data/${chunk}.js`));
 require('./js/data.js');
 const D = window.WikiData;
 
+function buildSearchIndex() {
+  const index = [];
+  (D.sections || []).forEach((section) => {
+    index.push({
+      id: section.key,
+      route: '/' + section.key,
+      title: section.label,
+      eyebrow: 'Section',
+      sectionKey: section.key,
+      kind: 'index',
+      desc: section.blurb
+    });
+    (D[section.key] || []).forEach((page) => {
+      index.push({
+        id: section.key + '/' + page.slug,
+        route: '/' + section.key + '/' + page.slug,
+        title: page.title,
+        eyebrow: section.label,
+        sectionKey: section.key,
+        kind: 'detail',
+        desc: page.tagline || page.summary
+      });
+    });
+  });
+  Object.keys(D.staticPages || {}).forEach((slug) => {
+    const page = D.staticPages[slug];
+    index.push({
+      id: slug,
+      route: '/' + slug,
+      title: page.title,
+      eyebrow: 'Manual',
+      sectionKey: 'static',
+      kind: 'static',
+      desc: page.tagline || page.summary
+    });
+  });
+  index.push({
+    id: 'updates',
+    route: '/updates',
+    title: 'Updates',
+    eyebrow: 'Manual',
+    sectionKey: 'static',
+    kind: 'updates',
+    desc: 'What the latest updates changed.'
+  });
+  index.push({
+    id: 'tips',
+    route: '/tips',
+    title: 'Field Tips',
+    eyebrow: 'Manual',
+    sectionKey: 'static',
+    kind: 'tips',
+    desc: 'Quick practical tips for new soldiers.'
+  });
+  index.push({
+    id: 'home',
+    route: '/',
+    title: 'Foxhole Field Manual',
+    eyebrow: 'Home',
+    sectionKey: 'home',
+    kind: 'home',
+    desc: D.site.tagline
+  });
+  return index;
+}
+
+D.searchIndex = buildSearchIndex();
+fs.writeFileSync(path.join(ROOT, 'js/data/search-index.js'), `(function(root){\n  root.WikiData = root.WikiData || {};\n  root.WikiData.searchIndex = ${JSON.stringify(D.searchIndex, null, 2)};\n})(typeof window !== 'undefined' ? window : globalThis);\n`);
+
 function stripTags(s) {
   return String(s || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }

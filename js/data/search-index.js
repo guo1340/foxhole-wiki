@@ -65,6 +65,24 @@
     "desc": "The war is won by groups, not individuals."
   },
   {
+    "id": "guides/best-role-for-beginners",
+    "route": "/guides/best-role-for-beginners",
+    "title": "Best Role for Beginners",
+    "eyebrow": "Guides",
+    "sectionKey": "guides",
+    "kind": "detail",
+    "desc": "Start where your mistakes are cheap and your help matters."
+  },
+  {
+    "id": "guides/common-beginner-mistakes",
+    "route": "/guides/common-beginner-mistakes",
+    "title": "Common Beginner Mistakes",
+    "eyebrow": "Guides",
+    "sectionKey": "guides",
+    "kind": "detail",
+    "desc": "Most early mistakes are not about aim."
+  },
+  {
     "id": "factions",
     "route": "/factions",
     "title": "Factions",
@@ -459,6 +477,15 @@
     "sectionKey": "facilities",
     "kind": "detail",
     "desc": "Shared industry, shared responsibility."
+  },
+  {
+    "id": "facilities/common-facility-mistakes",
+    "route": "/facilities/common-facility-mistakes",
+    "title": "Common Facility Mistakes",
+    "eyebrow": "Facilities",
+    "sectionKey": "facilities",
+    "kind": "detail",
+    "desc": "Most bad facilities fail before they produce anything useful."
   },
   {
     "id": "naval",

@@ -474,6 +474,229 @@
       "official-wiki"
     ],
     "updateNotes": "Regiment and squad tools are refined over time; the communication principles here are stable."
+  },
+  {
+    "slug": "best-role-for-beginners",
+    "section": "guides",
+    "icon": "helmet",
+    "title": "Best Role for Beginners",
+    "seoTitle": "Foxhole Best Role for Beginners: What New Players Should Do First",
+    "metaDescription": "Foxhole beginner role guide comparing infantry, logistics, medic, scouting, regiment play, tanks, naval, and facilities with practical recommendations.",
+    "tagline": "Start where your mistakes are cheap and your help matters.",
+    "summary": "The best beginner role in Foxhole is not the flashiest one. Most new players should start with basic infantry, medic work, and simple logistics before touching tanks, naval operations, or facilities. Those early roles teach the war without making your mistakes expensive.",
+    "teaches": [
+      "Which roles are beginner friendly",
+      "Why logistics is often the best long-term starting path",
+      "When to join a regiment",
+      "Which roles to avoid until you understand the war"
+    ],
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "Foxhole gives new players a dangerous amount of freedom. You can spawn, grab almost anything from a base, and run toward the biggest fight on the map. You can also hop into a vehicle, join a naval crew, or start poking at facilities long before you understand what those choices cost your faction.",
+          "That freedom is part of the appeal, but it is also why beginners get frustrated. The best first role is one that teaches core systems, lets you help immediately, and keeps the price of your mistakes low."
+        ]
+      },
+      {
+        "heading": "Why It Matters",
+        "body": [
+          "Foxhole is a logistics and coordination game first. Shooting matters, but the war is usually decided by supply flow, respawn shirts, map intel, and whether players communicate before a front collapses. A beginner who learns those systems becomes useful much faster than a beginner chasing expensive equipment.",
+          "Community advice usually lands in the same place: try a few roles, ask questions, and start with work that veterans can explain on the spot. Infantry, medic, simple trucking, and public logistics are all good because other players can see what you are doing and correct you before a mistake becomes a disaster."
+        ]
+      },
+      {
+        "heading": "Practical Uses",
+        "body": [
+          "For your first night, rotate through three jobs. Do one basic infantry deployment so you understand the front. Do one medic shift so you understand how shirts and wounded players affect a fight. Do one simple logistics loop so you understand where every rifle and bandage comes from.",
+          {
+            "list": [
+              "Infantry teaches cover, respawns, and how fast supplies vanish at the front",
+              "Medic work teaches patience, positioning, and why saving one player can save multiple shirts",
+              "Basic logistics teaches scrap, refineries, factories, stockpiles, and delivery discipline",
+              "Map and radio work teaches that information often matters more than aim"
+            ]
+          },
+          "After that, choose based on what you enjoyed, not what sounded heroic in chat."
+        ]
+      },
+      {
+        "heading": "Strengths",
+        "body": [
+          "Basic infantry is the easiest role to understand, but it can teach bad habits if you only sprint at enemy trenches. Medic is one of the best beginner roles because the loadout is cheap, the goal is clear, and you learn to stay behind cover. Logistics is the most valuable long-term beginner path because every war needs more people willing to do the unglamorous work.",
+          "Joining a friendly regiment can accelerate learning dramatically. A good group will explain loadouts, map movement, tank etiquette, and facility rules in minutes that would take a solo player days to discover."
+        ]
+      },
+      {
+        "heading": "Weaknesses",
+        "body": [
+          "Some roles are poor starting points. Tanks are expensive and crew-dependent, so a beginner can lose hours of faction work in one bad push. Naval play is powerful but complicated, often requiring coordination, map knowledge, and patience. Facilities can be useful, but a new player building a private facility usually creates maintenance chores rather than useful production.",
+          "Solo partisan work is also risky early. It sounds exciting, but without map awareness and logistics knowledge you are mostly wandering behind enemy lines hoping something useful happens."
+        ]
+      },
+      {
+        "heading": "Community Opinions",
+        "body": [
+          "Veterans often recommend logistics, medic, and infantry because these roles expose beginners to the whole war. Steam and Reddit discussions commonly tell new players that Foxhole is flexible and that people will help if you ask, but experienced players also warn beginners away from boats, high-value vehicles, and poorly planned facilities until they understand the basics.",
+          "There is some disagreement over whether beginners should join regiments immediately. My view is simple: join voice or squad play early if the group is welcoming, but do not feel trapped. A regiment should make the game clearer, not turn your first week into chores."
+        ]
+      },
+      {
+        "heading": "Common Mistakes",
+        "body": [
+          "The most common mistake is judging roles by excitement instead of impact. A truck of shirts delivered to a starving base may matter more than an hour of flashy infantry deaths. Another mistake is taking restricted or expensive gear because it is available. If you do not know why an item is valuable, leave it for someone who does.",
+          {
+            "list": [
+              "Taking tank or facility roles before understanding supply cost",
+              "Refusing to ask questions because you are embarrassed",
+              "Ignoring logistics because it sounds less fun than combat",
+              "Joining a regiment that does not respect your time",
+              "Measuring usefulness only by kills"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Recommendations",
+        "body": [
+          "Best overall first role: medic or basic infantry at a supplied front. Best role for learning the real game: logistics quickstart. Best role for social players: join a squad or regiment operation and ask for a simple job. Best role for solo players: public logistics, repairs, scouting, and map intel.",
+          "Avoid starting with facilities, tanks, naval crews, or advanced partisan work unless an experienced player is actively teaching you. Those roles are excellent later, but they are poor first lessons because the cost of failure is high."
+        ]
+      },
+      {
+        "heading": "Related Articles",
+        "body": [
+          "Start with First Deployment Guide, Frontline Basics, Logistics Quickstart, Regiment and Communication Guide, and Facilities Overview. Those pages form the cleanest path from confused recruit to useful faction member."
+        ]
+      }
+    ],
+    "mistake": "Choosing the most expensive or dramatic role first. The best beginner role is the one that teaches the war without wasting faction resources.",
+    "tip": "Do one infantry run, one medic shift, and one logistics loop before deciding what kind of Foxhole player you want to become.",
+    "related": [
+      "guides/first-deployment",
+      "guides/logistics-quickstart",
+      "combat/medic-guide",
+      "guides/regiments-and-communication",
+      "facilities/overview"
+    ],
+    "sources": [
+      "official-wiki",
+      "steam-news",
+      "subreddit"
+    ],
+    "updateNotes": "Beginner-friendly roles are stable, but vehicle, facility, and naval complexity shifts as updates change the war economy."
+  },
+  {
+    "slug": "common-beginner-mistakes",
+    "section": "guides",
+    "icon": "crosshair",
+    "title": "Common Beginner Mistakes",
+    "seoTitle": "Foxhole Common Beginner Mistakes: What New Players Should Avoid",
+    "metaDescription": "Foxhole beginner mistakes guide covering wasted shirts, bad logistics habits, over-equipping, silence, poor facility starts, and frontline tunnel vision.",
+    "tagline": "Most early mistakes are not about aim.",
+    "summary": "New Foxhole players usually hurt their faction by accident, not malice. They take too much gear, die with no plan, ignore supply, build things they cannot maintain, or stay silent when the map needs information.",
+    "teaches": [
+      "Why beginner mistakes usually cost logistics work",
+      "How to avoid wasting shirts and equipment",
+      "Why communication matters more than solo heroics",
+      "When to slow down and ask for help"
+    ],
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "Foxhole does not punish beginners with a tutorial failure screen. It lets them make real mistakes in a live war. That is exciting, but it means your first bad habit can consume resources another player spent time producing and delivering.",
+          "The good news is that most beginner mistakes are easy to avoid once you understand what veterans are watching for: shirts, supply flow, map awareness, and whether a player communicates."
+        ]
+      },
+      {
+        "heading": "Why It Matters",
+        "body": [
+          "A death in Foxhole is not just a death. It consumes a spawn supply, loses your carried gear, and may force someone else to rescue, replace, or resupply what you lost. One careless player is not fatal, but a whole front of careless players can empty a base faster than logistics can fill it.",
+          "The real beginner goal is not to become a perfect soldier. It is to become predictable, cheap to support, and useful enough that nearby veterans want to keep teaching you."
+        ]
+      },
+      {
+        "heading": "Practical Uses",
+        "body": [
+          "Use this page as a pre-deployment checklist. Before you leave a base, ask whether your loadout is cheap, whether you know your fallback, and whether you understand what the front needs. If the answer is no, slow down.",
+          {
+            "list": [
+              "Take a basic loadout until you understand expensive gear",
+              "Check base shirts before repeatedly respawning into a doomed fight",
+              "Carry bandages and use cover instead of relying on medics to fix every mistake",
+              "Ask in local, region, or logistics chat before draining stockpiles",
+              "Mark and report enemy movement rather than assuming someone else saw it"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Strengths",
+        "body": [
+          "The strongest beginner habits are boring on paper: cheap loadouts, clear communication, paying attention to supply, and sticking near experienced players. These habits make you easier to support and much more likely to survive long enough to learn.",
+          "A new player who asks what a base needs will often be more valuable than a confident player who grabs a rare weapon and charges into a machine gun."
+        ]
+      },
+      {
+        "heading": "Weaknesses",
+        "body": [
+          "The weakness of careful play is that it feels slow. Foxhole has long drives, quiet stretches, and defensive work that does not produce immediate excitement. Beginners sometimes assume they are doing nothing when they are actually holding a position, watching a flank, or preserving supplies.",
+          "Do not confuse slow with useless. The war is full of slow jobs that decide whether the exciting jobs can happen at all."
+        ]
+      },
+      {
+        "heading": "Community Opinions",
+        "body": [
+          "Community discussions repeat the same themes: new players should ask questions, avoid over-equipping, respect public logistics, and learn why shirts and basic supplies matter. Logistics players in particular are sensitive to waste because they know exactly how much time sits behind a base inventory.",
+          "Facilities are another recurring complaint. Veterans often criticize overbuilt personal facilities because they consume maintenance and resource attention while producing little. The lesson for beginners is not never touch facilities; it is join and learn before you build."
+        ]
+      },
+      {
+        "heading": "Common Mistakes",
+        "body": [
+          {
+            "list": [
+              "Taking expensive gear without understanding its role",
+              "Dying repeatedly at an empty or undersupplied base",
+              "Driving supplies to the loudest front instead of the neediest one",
+              "Pulling from public stockpiles for private projects",
+              "Building facilities, trenches, or bases that block friendlies or require maintenance you will not provide",
+              "Going silent when you see tanks, partisans, or a flank forming"
+            ]
+          },
+          "Most of these mistakes share one cause: acting as if Foxhole is a solo shooter. It is not. Every action touches the faction economy and someone else has to live with the results."
+        ]
+      },
+      {
+        "heading": "Recommendations",
+        "body": [
+          "Start cheap, communicate early, and learn one complete logistics loop even if you mostly want to fight. If you are unsure whether something is valuable, do not take it. If you are unsure whether a base needs a delivery, ask or check nearby stockpiles. If you are unsure whether to build something, do not build it yet.",
+          "The fastest way to stop making beginner mistakes is to follow a veteran for thirty minutes and ask why they are doing each step. Foxhole rewards judgment, and judgment comes from watching decisions, not memorizing stat tables."
+        ]
+      },
+      {
+        "heading": "Related Articles",
+        "body": [
+          "Read First Deployment Guide for the first hour, How to Not Waste Supplies for stockpile discipline, Public Stockpiles for logistics etiquette, Facility Etiquette for shared industry, and Frontline Basics for combat behaviour."
+        ]
+      }
+    ],
+    "mistake": "Treating every death and every item as free. In Foxhole, another player usually paid for your mistake in time.",
+    "tip": "If you are not sure what to do, ask what the base needs. That one question prevents half of all beginner waste.",
+    "related": [
+      "guides/first-deployment",
+      "guides/how-to-not-waste-supplies",
+      "logistics/public-stockpiles",
+      "facilities/facility-etiquette",
+      "guides/frontline-basics"
+    ],
+    "sources": [
+      "official-wiki",
+      "subreddit",
+      "discord"
+    ],
+    "updateNotes": "The exact economy changes over time, but these beginner mistakes remain relevant in every war."
   }
 ];
 })(typeof window !== 'undefined' ? window : globalThis);
