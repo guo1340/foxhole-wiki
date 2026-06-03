@@ -6,6 +6,7 @@ const path = require('path');
 const ROOT = __dirname;
 const BASE_URL = 'https://foxhole.gamewikihub.com';
 const APP = require.resolve('./js/app.js');
+const PARTIAL_DIR = path.join(ROOT, 'partials');
 
 const DATA_CHUNKS = [
   'core',
@@ -253,6 +254,14 @@ function scriptTags() {
   return `${chunks}\n    <script src="/js/data.js"></script>\n    <script src="/js/app.js"></script>`;
 }
 
+function readPartial(name) {
+  return fs.readFileSync(path.join(PARTIAL_DIR, `${name}.html`), 'utf8').trim();
+}
+
+function renderPartial(name, values) {
+  return readPartial(name).replace(/\{\{(\w+)\}\}/g, (_m, key) => values[key] == null ? '' : values[key]);
+}
+
 function pageHtml(route, rendered) {
   const title = rendered.title || `${D.site.name}`;
   const description = rendered.description || D.site.description;
@@ -268,6 +277,12 @@ function pageHtml(route, rendered) {
     url: canonical,
     isPartOf: { '@type': 'WebSite', name: D.site.name, url: BASE_URL + '/' }
   });
+  const header = renderPartial('header', {});
+  const sidebars = renderPartial('sidebar', {
+    nav: rendered.nav,
+    sidebar: rendered.sidebar
+  });
+  const footer = renderPartial('footer', { footer: rendered.footer });
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -303,27 +318,12 @@ function pageHtml(route, rendered) {
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="/" data-link>
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" width="34" height="34"><path d="M8 38 L24 8 L40 38 Z" fill="none" stroke="var(--accent)" stroke-width="3"/><line x1="24" y1="18" x2="24" y2="38" stroke="var(--accent-2)" stroke-width="3"/></svg></span>
-        <span class="brand-text"><strong>Foxhole</strong><em>Field Manual</em></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-      <div class="topbar-actions">
-        <button class="search-btn" id="searchBtn" aria-label="Search the field manual">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="22" y2="22" stroke="currentColor" stroke-width="2"/></svg>
-          <span>Search</span><kbd>/</kbd>
-        </button>
-      </div>
-    </div>
-  </header>
+  ${header}
   <div class="layout">
-    <nav class="sidenav" id="sidenav" aria-label="Primary">${rendered.nav}</nav>
+    ${sidebars.split('\n').join('\n    ')}
     <main id="main" class="content" tabindex="-1">${rendered.main}</main>
-    <aside class="sidebar" id="sidebar" aria-label="Page details">${rendered.sidebar}</aside>
   </div>
-  <footer class="sitefooter" id="sitefooter">${rendered.footer}</footer>
+  ${footer}
   <div class="search-overlay" id="searchOverlay" hidden>
     <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search">
       <div class="search-input-row">
@@ -357,10 +357,28 @@ function writeRoute(route) {
 
 routeList().forEach(writeRoute);
 
-const urls = routeList()
+const allRoutes = routeList();
+const urls = allRoutes
   .filter((route) => route !== '/404')
   .map((route) => `  <url><loc>${BASE_URL}${route === '/' ? '/' : route + '/'}</loc></url>`)
   .join('\n');
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 
-console.log(`Foxhole static build complete: ${routeList().length} HTML files generated.`);
+function verifySitemapCoverage(routes) {
+  const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  const urls = new Set(Array.from(sitemap.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => {
+    const url = m[1];
+    if (url === `${BASE_URL}/`) return '/';
+    return url.replace(BASE_URL, '').replace(/\/$/, '');
+  }));
+  const publicRoutes = routes.filter((route) => route !== '/404');
+  const missing = publicRoutes.filter((route) => !urls.has(route));
+  const extra = Array.from(urls).filter((route) => !publicRoutes.includes(route));
+  if (missing.length || extra.length) {
+    throw new Error(`Sitemap mismatch. Missing: ${missing.join(', ') || 'none'} Extra: ${extra.join(', ') || 'none'}`);
+  }
+}
+
+verifySitemapCoverage(allRoutes);
+
+console.log(`Foxhole static build complete: ${allRoutes.length} HTML files generated. Sitemap covers ${allRoutes.length - 1} public pages.`);
