@@ -67,6 +67,20 @@ const metaStore = {
   ogDescription: '',
   ogUrl: ''
 };
+const bodyClassSet = new Set();
+const bodyMock = {
+  classList: {
+    add(name) { bodyClassSet.add(name); },
+    remove(name) { bodyClassSet.delete(name); },
+    toggle(name, force) {
+      const shouldAdd = force === undefined ? !bodyClassSet.has(name) : !!force;
+      if (shouldAdd) bodyClassSet.add(name);
+      else bodyClassSet.delete(name);
+      return shouldAdd;
+    },
+    contains(name) { return bodyClassSet.has(name); }
+  }
+};
 
 function elById(id) {
   if (!els[id]) els[id] = mkEl(id);
@@ -88,6 +102,7 @@ function metaEl(key) {
 let CURRENT = '/';
 global.document = {
   documentElement: { style: { setProperty() {} } },
+  body: bodyMock,
   getElementById: elById,
   createElement: () => mkEl('created'),
   addEventListener() {},
@@ -313,14 +328,22 @@ function pageHtml(route, rendered) {
     .search-btn svg{width:18px;height:18px}
     .search-input-row svg{width:20px;height:20px}
   </style>
-  <link rel="stylesheet" href="/css/style.css?v=foxhole-static-3" />
+  <link rel="stylesheet" href="/css/style.css?v=foxhole-static-4" />
+  <noscript><style>body.is-loading .site-loader{display:none}body.is-loading .content{opacity:1;transform:none;pointer-events:auto}</style></noscript>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230d1117'/%3E%3Cpath d='M14 40 L32 14 L50 40 Z' fill='none' stroke='%23c9a45c' stroke-width='4'/%3E%3Cline x1='32' y1='22' x2='32' y2='40' stroke='%236f8f72' stroke-width='4'/%3E%3C/svg%3E" />
 </head>
-<body>
+<body class="is-loading">
   <a class="skip-link" href="#main">Skip to content</a>
   ${header}
   <div class="layout">
     ${sidebars.split('\n').join('\n    ')}
+    <div class="site-loader" id="siteLoader" role="status" aria-live="polite">
+      <div class="loader-card">
+        <span class="loader-kicker">Field Manual</span>
+        <strong>Establishing supply line</strong>
+        <span class="loader-bar" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
     <main id="main" class="content" tabindex="-1">${rendered.main}</main>
   </div>
   ${footer}

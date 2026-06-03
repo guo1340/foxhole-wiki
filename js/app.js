@@ -57,6 +57,18 @@
       '</figure>';
   }
 
+  function setPageLoading(on) {
+    if (!document.body) return;
+    document.body.classList.toggle("is-loading", !!on);
+    document.body.classList.toggle("is-ready", !on);
+  }
+
+  function revealPage() {
+    var done = function () { setPageLoading(false); };
+    if (window.requestAnimationFrame) window.requestAnimationFrame(done);
+    else setTimeout(done, 30);
+  }
+
   /* ---------------- Ad slots (Google AdSense) ---------------- */
   /* Produces a single AdSense unit. Pass true for a fixed banner,
      false/omitted for a responsive auto unit. */
@@ -247,8 +259,8 @@
       }
     }
 
-    main.innerHTML = html;
     renderDetailSidebar(pg, entry);
+    main.innerHTML = html;
     setMeta({
       title: pg.seoTitle || (pg.title + " — " + D.site.name),
       description: pg.metaDescription || pg.summary,
@@ -318,7 +330,6 @@
       return { route: pg.route, title: pg.title, desc: pg.tagline || pg.summary, icon: pg.icon };
     }));
     html += '</div>';
-    main.innerHTML = html;
 
     // sidebar
     var sb = document.getElementById("sidebar");
@@ -328,6 +339,7 @@
     }).join("");
     sbHtml += '</div>' + adSlot();
     sb.innerHTML = sbHtml;
+    main.innerHTML = html;
 
     setMeta({
       title: secMeta.label + " — " + D.site.name,
@@ -395,8 +407,6 @@
       '<p><a href="/airborne/overview" data-link>Read the Airborne overview &rsaquo;</a> &nbsp; ' +
       '<a href="/updates" data-link>See all updates &rsaquo;</a></p></div>';
 
-    main.innerHTML = html;
-
     // sidebar
     var sb = document.getElementById("sidebar");
     var sbHtml = '<div class="side-card"><h4>Browse Sections</h4>';
@@ -408,6 +418,7 @@
     sbHtml += '<div class="side-card"><h4>Field Tip</h4><p style="font-size:.86rem;color:var(--muted);margin:0;">' +
       esc(D.tips[0].text) + '</p></div>';
     sb.innerHTML = sbHtml;
+    main.innerHTML = html;
 
     setMeta({
       title: "Foxhole Field Manual — Practical Guides for Logistics, Combat & War",
@@ -437,7 +448,6 @@
         '<h2 style="text-transform:uppercase;margin:4px 0 8px;">' + esc(u.title) + '</h2>' +
         u.body.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + '</div>';
     });
-    main.innerHTML = html;
     document.getElementById("sidebar").innerHTML =
       adSlot() +
       '<div class="side-card dossier"><h4>Patch Notes</h4>' +
@@ -447,6 +457,7 @@
             '" target="_blank" rel="noopener">' + esc(s.name) + '</a>' +
             '<span class="src-note">' + esc(s.note) + '</span></div>';
         }).join("") + '</div>';
+    main.innerHTML = html;
     setMeta({ title: "Foxhole Updates — " + D.site.name,
       description: "Practical summaries of recent Foxhole updates including Airborne and Update 64.",
       route: "/updates", schemaType: "CollectionPage" });
@@ -463,8 +474,8 @@
     html += '<ul class="tips-list">' + D.tips.map(function (t) {
       return '<li><span class="tip-cat">' + esc(t.cat) + '</span>' + esc(t.text) + '</li>';
     }).join("") + '</ul>';
-    main.innerHTML = html;
     document.getElementById("sidebar").innerHTML = adSlot();
+    main.innerHTML = html;
     setMeta({ title: "Foxhole Field Tips — " + D.site.name,
       description: "Quick practical Foxhole tips for new players on logistics, survival, and etiquette.",
       route: "/tips", schemaType: "CollectionPage" });
@@ -472,11 +483,11 @@
 
   /* ---------------- Not found ---------------- */
   function renderNotFound() {
+    document.getElementById("sidebar").innerHTML = "";
     document.getElementById("main").innerHTML =
       '<div class="notfound"><h1>404</h1>' +
       '<p>That position is not on the map. The page you requested could not be found.</p>' +
       '<p><a class="btn btn-primary" href="/" data-link>Return to base</a></p></div>';
-    document.getElementById("sidebar").innerHTML = "";
     setMeta({ title: "Page Not Found — " + D.site.name,
       description: "The requested page could not be found.", route: "/" });
   }
@@ -672,12 +683,14 @@
 
   /* Render the route, then (re)activate any AdSense units it added. */
   function route() {
+    setPageLoading(true);
     routeInner();
     activateAds();
     if (window.scrollTo) {
       if (window.requestAnimationFrame) window.requestAnimationFrame(function () { window.scrollTo(0, 0); });
       else window.scrollTo(0, 0);
     }
+    revealPage();
   }
 
   function navigate(href) {
@@ -714,6 +727,7 @@
 
   /* ---------------- Init ---------------- */
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  setPageLoading(true);
   buildNav();
   buildFooter();
   route();
